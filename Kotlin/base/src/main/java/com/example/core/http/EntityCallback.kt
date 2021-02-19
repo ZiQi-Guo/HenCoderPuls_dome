@@ -1,10 +1,6 @@
-package com.example.core.http;
+package com.example.core.http
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-public interface EntityCallback<T> {
-    void onSuccess(@NonNull T entity);
-
-    void onFailure(@Nullable String message);
+interface EntityCallback<T> {
+    fun onSuccess(entity: T)
+    fun onFailure(message: String?)
 }

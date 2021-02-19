@@ -1,26 +1,18 @@
-package com.example.core.utils;
+package com.example.core.utils
 
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.widget.Toast;
+import android.content.res.Resources
+import android.util.TypedValue
+import android.widget.Toast
+import com.example.core.BaseApplication
 
-import com.example.core.BaseApplication;
-
-public class Utils {
-
-    private static final DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-
-    public static float dp2px(float dp) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
+object Utils {
+    private val displayMetrics = Resources.getSystem().displayMetrics
+    fun dp2px(dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics)
     }
 
-    public static void toast(String string) {
-        toast(string, Toast.LENGTH_SHORT);
+    @JvmOverloads
+    fun toast(string: String?, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(BaseApplication.Companion.currentApplication(), string, duration).show()
     }
-
-    public static void toast(String string, int duration) {
-        Toast.makeText(BaseApplication.currentApplication(), string, duration).show();
-    }
-
 }

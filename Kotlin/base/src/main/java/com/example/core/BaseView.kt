@@ -1,5 +1,5 @@
-package com.example.core;
+package com.example.core
 
-public interface BaseView<T> {
-    T getPresenter();
+interface BaseView<T> {
+    val presenter: T
 }
