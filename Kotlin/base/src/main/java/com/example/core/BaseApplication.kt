@@ -4,15 +4,15 @@ import android.app.Application
 import android.content.Context
 
 class BaseApplication : Application() {
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
+
+    override fun onCreate() {
+        super.onCreate()
         currentApplication = this
     }
 
     companion object {
-        private var currentApplication: Context? = null
-        fun currentApplication(): Context {
-            return currentApplication!!
-        }
+        @JvmStatic
+        lateinit var currentApplication: Context
+            private set
     }
 }
