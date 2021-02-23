@@ -13,7 +13,13 @@ import com.example.core.utils.Utils.dp2px
 import java.util.*
 
 class CodeView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null) : AppCompatTextView(context, attrs) {
-    private val paint = Paint()
+    private val paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
+    }
+
     private val codeList = arrayOf(
             "kotlin",
             "android",
@@ -41,10 +47,6 @@ class CodeView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
         gravity = Gravity.CENTER
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = getContext().getColor(R.color.colorAccent)
-        paint.strokeWidth = 6f.dp2px()
         updateCode()
     }
 }

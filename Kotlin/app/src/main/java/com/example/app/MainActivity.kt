@@ -11,6 +11,7 @@ import com.example.app.widget.CodeView
 import com.example.core.utils.CacheUtils
 import com.example.core.utils.Utils
 import com.example.lesson.LessonActivity
+import kotlin.reflect.KProperty
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val usernameKey = "username"
@@ -39,6 +40,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    var usernameSaver: String by Saver(usernameKey)
+    var passwordSaver: String by Saver(passwordKey)
+
+    class Saver(private val key: String) {
+        operator fun getValue(mainActivity: MainActivity, property: KProperty<*>): String {
+            return CacheUtils[key]!!
+        }
+
+        operator fun setValue(mainActivity: MainActivity, property: KProperty<*>, value: String) {
+            CacheUtils.save(key, value)
+        }
+    }
+
     private fun login() {
         val username = et_username.text.toString()
         val password = et_password.text.toString()
@@ -58,8 +72,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         if (verify()) {
-            CacheUtils.save(usernameKey, username)
-            CacheUtils.save(passwordKey, password)
+            //验证通过后保存
+            usernameSaver = username
+            passwordSaver = password
             startActivity(Intent(this, LessonActivity::class.java))
         }
     }
